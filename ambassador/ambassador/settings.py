@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'referral'
+    'referral',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -124,3 +125,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
