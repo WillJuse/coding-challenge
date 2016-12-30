@@ -3,15 +3,27 @@
   <body ng-app="referral.demo">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="{% static "referral/referral.js" %}"></script>
+    <script src="{% static "referral/referral.directive.js" %}"></script>
     {% verbatim %}
     <div ng-controller="ReferralController">
 
       <input type="text" ng-model="new_referral" />
       <button ng-click="add(ref, new_referral)">+</button>
 
-      <div ng-repeat="ref in data">
-        {{ref.name}}
-      </div>
+      <table style="width:100%">
+        <tr>
+          <th>Referral</th>
+          <th># of Clicks</th>
+        </tr>
+
+
+        <tr ng-repeat="ref in data" referral-element>
+          <td><referral-element></td>
+          <td>{{ref.clicks}}
+        </tr>
+
+
+      </table>
 
     </div>
     {% endverbatim %}
