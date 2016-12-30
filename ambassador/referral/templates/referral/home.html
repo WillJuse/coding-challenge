@@ -1,0 +1,19 @@
+{% load static %}
+<html>
+  <body ng-app="referral.demo">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="{% static "referral/referral.js" %}"></script>
+    {% verbatim %}
+    <div ng-controller="ReferralController">
+
+      <input type="text" ng-model="new_referral" />
+      <button ng-click="add(ref, new_referral)">+</button>
+
+      <div ng-repeat="ref in data">
+        {{ref.name}}
+      </div>
+
+    </div>
+    {% endverbatim %}
+  </body>
+</html>

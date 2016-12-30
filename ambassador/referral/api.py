@@ -1,8 +1,8 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.viewsets import ModelViewSet
 
 from .serializers import ReferralsSerializer
 from .models import Referrals
 
-class ReferralsApi(ListAPIView):
+class ReferralsViewSet(ModelViewSet):
     queryset = Referrals.objects.all();
     serializer_class = ReferralsSerializer

@@ -1,7 +1,7 @@
-from django.conf.urls import url
+from rest_framework.routers import DefaultRouter
+from .api import ReferralsViewSet
 
-from .api import ReferralsApi
+router = DefaultRouter()
+router.register(r'referrals', ReferralsViewSet)
 
-urlpatterns = [
-    url(r'^referrals$', ReferralsApi.as_view()),
-]
+urlpatterns = router.urls
