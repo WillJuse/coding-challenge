@@ -2,8 +2,9 @@
 <html>
   <body ng-app="referral.demo">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-    <script src="{% static "referral/referral.js" %}"></script>
-    <script src="{% static "referral/referral.directive.js" %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
+    <script src="{% static "referral/js/referral.js" %}"></script>
+    <script src="{% static "referral/js/referral.directive.js" %}"></script>
     {% verbatim %}
     <div ng-controller="ReferralController">
 
@@ -14,12 +15,15 @@
         <tr>
           <th>Referral</th>
           <th># of Clicks</th>
+          <th>Delete</th>
         </tr>
 
 
-        <tr ng-repeat="ref in data" referral-element>
-          <td><referral-element></td>
-          <td>{{ref.clicks}}
+        <tr ng-repeat="ref in data | orderBy:'-clicks'" style="text-align:center;">
+          <td><a href="" ng-click="updateReferrals(ref)">{{ref.name}}</a></td>
+          <td>{{ref.clicks}}</td>
+          <td><a href="">Edit</a></td>
+          <td><a href="" ng-click="deleteReferrals($index)">Delete</a></td>
         </tr>
 
 

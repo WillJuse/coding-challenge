@@ -6,7 +6,7 @@
 
   function ReferralElement() {
     return {
-      templateUrl: "/static/referral/referral.html",
+      templateUrl: "/static/referral/templates/referral.html", // TODO this needs to change.
       restrict: 'E', // This restricts it to an element, not an attribute or other.
       controller: ['$scope', '$http', function($scope, $http) {
         var url = '/referral/referrals/' + $scope.ref.id + '/';
