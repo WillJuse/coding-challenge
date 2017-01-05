@@ -1,36 +1,17 @@
 {% load static %}
 <html>
+  <head>
+    <meta charset="utf-8">
+
+    <base href="/">
+  </head>
   <body ng-app="referral.demo">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
     <script src="{% static "referral/js/referral.js" %}"></script>
+    <script src="{% static "referral/js/referralDetails.js" %}"></script>
+    <script src="{% static "referral/js/referral.config.js" %}"></script>
     <script src="{% static "referral/js/referral.directive.js" %}"></script>
-    {% verbatim %}
-    <div ng-controller="ReferralController">
-
-      <input type="text" ng-model="new_referral" />
-      <button ng-click="add(ref, new_referral)">+</button>
-
-      <table style="width:100%">
-        <tr>
-          <th>Referral</th>
-          <th># of Clicks</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-
-
-        <tr ng-repeat="ref in data | orderBy:'-clicks'" style="text-align:center;">
-          <td><a href="" ng-click="updateReferrals(ref)">{{ref.name}}</a></td>
-          <td>{{ref.clicks}}</td>
-          <td><a href="">Edit</a></td>
-          <td><a href="" ng-click="deleteReferrals($index)">Delete</a></td>
-        </tr>
-
-
-      </table>
-
-    </div>
-    {% endverbatim %}
+    <ng-view></ng-view>
   </body>
 </html>
