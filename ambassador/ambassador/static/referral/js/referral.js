@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('referral.demo', ['ngRoute'])
-    .controller('ReferralController', ['$scope', '$http', ReferralController]);
+    .controller('ReferralController', ['$scope', '$http', '$location', ReferralController]);
 
-  function ReferralController($scope, $http) {
+  function ReferralController($scope, $http, $location) {
 
     $scope.data = [];
     $http.get('/referral/referrals/').then(function(response){
@@ -15,13 +15,20 @@
       var ref = {
         name: new_referral
       };
-      $http.post('/referral/referrals/', ref)
-        .then(function(response){
-          $scope.data.push(response.data);
-        },
-        function(){
-          alert('failed to create referral...Will probably did something wrong');
-        });
+
+      if ($scope.data.filter(x => x.name === ref.name).length === 0) {
+        $http.post('/referral/referrals/', ref)
+          .then(function(response) {
+            $scope.data.push(response.data);
+            $location.path('/landing').search({'link' : ref.name});
+          },
+          function(response){
+            alert('failed to create referral...Will probably did something wrong ' + response.data);
+          });
+      }
+      else {
+        alert('We already have a referral for ' + ref.name + ' click it if you would like to increase the number of referrals');
+      }
 
     };
 
