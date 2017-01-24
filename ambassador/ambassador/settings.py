@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,13 +80,33 @@ WSGI_APPLICATION = 'ambassador.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+HEROKU_POSTGRESQL_CHARCOAL_URL='postgres:postgres://rwmvrrinphfxmq:325977f110dc14cf6e4100d90afc32f49a76f31ef96722aa6feec791a77c6689@ec2-54-235-168-152.compute-1.amazonaws.com:5432/deqvp9a59iieqc'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+ON_HEROKU = os.environ.get('ON_HEROKU')
+HEROKU_SERVER = os.environ.get('HEROKU_SERVER')
+
+if ON_HEROKU:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'postgresql',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.path.join(BASE_DIR, 'postgresql'),
+            'USER': 'willjuszczyk',
+            'PASSWORD': 'clarkkent',
+            'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': '5432',
+        }
+    }
+
+
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Password validation
